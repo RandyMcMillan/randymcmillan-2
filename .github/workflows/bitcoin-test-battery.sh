@@ -71,7 +71,7 @@ echo $TIME
 make-data-dir
 
 pushd $PWD
-    git clone --depth 100 -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$TIME && \
+    git clone -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$TIME && \
         pushd $PWD/bitcoin-test-battery-$TIME
     git fetch --all
     git checkout $RC
