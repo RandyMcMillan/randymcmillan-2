@@ -136,7 +136,8 @@ report:
 git-add: remove
 	@echo git-add
 
-	git add *
+	git config advice.addIgnoredFile false
+	#git add *
 
 	git add --ignore-errors GNUmakefile
 	git add --ignore-errors README.md
@@ -176,8 +177,7 @@ branch: remove git-add docs touch-time touch-block-time
 .ONESHELL:
 global-branch: remove git-add docs touch-time touch-global touch-block-time
 	@echo global-branch
-	bash -c "git add --ignore-errors * .github && \
-		git commit -m 'make global-branch by $(GIT_USER_NAME) on global-$(TIME)'"
+	bash -c "git commit -m 'make global-branch by $(GIT_USER_NAME) on global-$(TIME)'"
 		git branch global-$(TIME)
 		git push -f --all
 
@@ -185,8 +185,7 @@ global-branch: remove git-add docs touch-time touch-global touch-block-time
 .ONESHELL:
 time-branch: remove git-add docs touch-time touch-block-time
 	@echo time-branch
-	bash -c "git add --ignore-errors * .github && \
-		git commit -m 'make time-branch by $(GIT_USER_NAME) on time-$(TIME)'"
+	bash -c "git commit -m 'make time-branch by $(GIT_USER_NAME) on time-$(TIME)'"
 		git branch time-$(TIME)
 		git push -f origin time-$(TIME)
 
@@ -214,8 +213,7 @@ touch-block-time: remove git-add
 	BLOCK_TIME=$(shell  ./touch-block-time.py)
 	bash -c "export BLOCK_TIME"
 	echo $(BLOCK_TIME)
-	bash -c "git add --ignore-errors * .github && \
-		git commit --allow-empty -m '$(shell ./touch-block-time.py)-$(TIME)'"
+	bash -c "git commit --allow-empty -m '$(shell ./touch-block-time.py)-$(TIME)'"
 		git branch $(shell ./touch-block-time.py)-$(TIME)
 		git push -f origin $(shell ./touch-block-time.py)-$(TIME)
 
