@@ -20,6 +20,15 @@ on:
   workflow_dispatch:
 
 jobs:
+
+  github-workspace:
+    name: github-workspace
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Print github workspace
+        run: |
+          printenv
+
   build:
     runs-on: ${{ matrix.os }}
     strategy:
