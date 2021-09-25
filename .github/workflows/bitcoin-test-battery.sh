@@ -63,13 +63,8 @@ make-data-dir
 echo $BITCOIN_TEST_BATTERY
 
 pushd $PWD
-    if [[ -d "$PWD/bitcoin-test-battery" ]];then
-        pushd $PWD/bitcoin-test-battery
-    else
-        git clone -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery && pushd $PWD/bitcoin-test-battery
-    fi
-    #[[ -d "~/bitcoin-test-battery" ]] && echo && pushd ~/bitcoin-test-battery \
-    #    || git clone -b $RC https://github.com/$GH_USER/bitcoin ~/bitcoin-test-battery && pushd $PWD/bitcoin-test-battery
+    git clone -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$(TIME) && \
+        pushd $PWD/bitcoin-test-battery-$(TIME)
     git fetch --all
     git checkout $RC
     #

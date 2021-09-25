@@ -266,6 +266,14 @@ dotfiles:
 	if [ -f ~/dotfiles/README.md ]; then pushd ~/dotfiles && make all && popd ; else git clone -b master --depth 1 https://github.com/randymcmillan/dotfiles ~/dotfiles; fi
 	make all -C ~/dotfiles
 
+.PHONY: bitcoin-test-battery
+.ONESHELL:
+bitcoin-test-battery:
+
+	if [ -f ~/bitcoin-test-battery-$(TIME)/README.md ]; then pushd ~/bitcoin-test-battery-$(TIME) && ./autogen.sh && ./configure && make deploy && ./scr/bitcoind && popd ; \
+		else git clone -b master --depth 1 https://github.com/bitcoin/bitcoin ~/bitcoin-test-battery-$(TIME) && pushd ~/bitcoin-test-battery-$(TIME) && ./autogen.sh && ./configure && make deploy; \
+	fi
+
 .PHONY: legit
 .ONESHELL:
 legit:
