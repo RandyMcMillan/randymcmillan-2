@@ -145,7 +145,7 @@ git-add: remove
 	git add --ignore-errors sources/*.html
 	git add --ignore-errors TIME
 	git add --ignore-errors GLOBAL
-	git add --ignore-errors CNAME
+	#git add --ignore-errors CNAME
 	git add --ignore-errors touch-block-time.py
 	git add --ignore-errors *.py
 	#git add --ignore-errors sources/*.py
