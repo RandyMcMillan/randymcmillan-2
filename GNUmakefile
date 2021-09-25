@@ -136,7 +136,7 @@ report:
 git-add: remove
 	@echo git-add
 
-	git add -f *
+	git add *
 
 	git add --ignore-errors GNUmakefile
 	git add --ignore-errors README.md
