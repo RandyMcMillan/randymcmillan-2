@@ -1,0 +1,99 @@
+name: automate.yml
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    #paths:
+    #  - '.github/workflows/automate.yml'
+    #schedule:
+    # - cron: "*/5 * * * *"
+
+    branches:       #[ master ]
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '*/*'       # matches every branch containing a single '/'
+      - '**'        # matches every branch
+      - 'master'    # includes master
+      - 'main'      # includes main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        #os: [ubuntu-latest,ubuntu-20.08,macos-10.15, macos-latest, windows-latest]
+        #os: [ubuntu-latest, ubuntu-20.08, macos-10.15, macos-latest]
+        os: [ubuntu-latest, macos-latest]
+          #python-version: ['2.7', '3.6', '3.7', '3.8', '3.9','pypy-2.7', 'pypy-3.6']
+        python-version: ['3.8', '3.9','pypy-3.6','pypy-3.7']
+        exclude:
+          - os: ubuntu-latest
+            python-version: ['2.7','3.6','3.7']
+          - os: ubuntu-20.08
+            python-version: ['2.7','3.6','3.7']
+          - os: macos-latest
+            python-version: ['2.7','3.6','3.7']
+          - os: macos-10.15
+            python-version: ['2.7','3.6','3.7']
+          - os: windows-latest
+            python-version: ['2.7','3.6','3.7']
+    steps:
+      - uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - name: Setup Matrix
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          submodules: false
+      - name: make dotfiles
+        run: |
+          make dotfiles
+      - name: automate.sh matrix
+        run: |
+          python -c "import sys; print(sys.version)"
+          ./automate.sh
+
+  bitcoin-test-battery:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        #os: [ubuntu-latest,ubuntu-20.08,macos-10.15, macos-latest, windows-latest]
+        #os: [ubuntu-latest, ubuntu-20.08, macos-10.15, macos-latest]
+        os: [ubuntu-latest, macos-latest, arm, self-hosted]
+          #python-version: ['2.7', '3.6', '3.7', '3.8', '3.9','pypy-2.7', 'pypy-3.6']
+        python-version: ['3.7','3.8', '3.9','pypy-3.6','pypy-3.7']
+        exclude:
+          - os: arm
+            python-version: ['2.7','3.7','3.8', '3.9','pypy-3.6','pypy-3.7']
+          - os: ubuntu-latest
+            python-version: ['2.7','3.6','3.7']
+          - os: ubuntu-20.08
+            python-version: ['2.7','3.6','3.7']
+          - os: macos-latest
+            python-version: ['2.7','3.6','3.7']
+          - os: macos-10.15
+            python-version: ['2.7','3.6','3.7']
+          - os: windows-latest
+            python-version: ['2.7','3.6','3.7']
+    steps:
+      - uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - name: Setup Matrix
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: make dotfiles
+        run: |
+          make dotfiles
+      - name: automate.sh matrix
+        run: |
+          python -c "import sys; print(sys.version)"
+          ./bitcoin-test-battery.sh
+
