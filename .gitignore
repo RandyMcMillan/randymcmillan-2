@@ -1,3 +1,5 @@
+bitcoin-test-battery-*
+
 *.DS_Store
 venv
 _private_build

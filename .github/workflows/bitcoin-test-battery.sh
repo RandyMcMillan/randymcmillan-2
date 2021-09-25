@@ -9,9 +9,15 @@ export GH_USER
 if [ -z "$1" ]; then
 #RC=v22.0rc3-boost-fetch
 #RC=v22.0rc3
+
+RECENT_TAG=$(git ls-remote --tags --refs --sort="v:refname" git://github.com/bitcoin/bitcoin.git | tail -n1 | sed 's/.*\///')
+
+#echo $RECENT_TAG
+
 git ls-remote --tags https://github.com/bitcoin/bitcoin.git v2*
+echo
 echo Example:
-echo ./bitcoin-test-battery.sh v22.0rc3
+echo ./bitcoin-test-battery.sh $RECENT_TAG
 exit;
 else
 RC=$1
@@ -58,13 +64,15 @@ make-data-dir(){
 
 doIt(){
 
+TIME=$(date +%s)
+export TIME
+echo $TIME
+
 make-data-dir
 
-echo $BITCOIN_TEST_BATTERY
-
 pushd $PWD
-    git clone -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$(TIME) && \
-        pushd $PWD/bitcoin-test-battery-$(TIME)
+    git clone --depth 100 -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$TIME && \
+        pushd $PWD/bitcoin-test-battery-$TIME
     git fetch --all
     git checkout $RC
     #
