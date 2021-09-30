@@ -91,6 +91,10 @@ PRIVATE_ALLSPHINXOPTS = -d $(PRIVATE_BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(S
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
+.PHONY: init
+init:
+	pip3 install twitter_scraper
+
 .PHONY: help
 help: report
 	@echo ""
