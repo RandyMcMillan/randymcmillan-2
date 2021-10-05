@@ -92,7 +92,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-20.08, macos-10.15, macos-latest, arm, self-hosted]
-        python-version: ['3.8', '3.9']
+          #python-version: ['3.8', '3.9']
+        python-version: ['3.9']
         exclude:
           - os: arm
             python-version: ['2.7','3.7','3.8', '3.9']
@@ -129,7 +130,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-20.08, macos-10.15, macos-latest, arm, self-hosted]
-        python-version: ['3.7','3.8', '3.9']
+          #python-version: ['3.7','3.8', '3.9']
+        python-version: ['3.9']
         exclude:
           - os: arm
             python-version: ['2.7','3.8','3.9']
@@ -162,5 +164,39 @@ jobs:
 
           #./scraper.py
 
+
+  bitcoinand-u18-host:
+    runs-on: ubuntu-18.04
+    steps:
+      ## REF: https://githubmemory.com/repo/Gisleburt/cancel-workflow-action
+      - uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2
+      - name: Make
+        run: |
+          git clone https://github.com/BitcoinAnd/bitcoinAnd.github.io.git ~/bitcoinAnd && pushd ~/bitcoinAnd
+          sudo make install
+          sudo npm run-script build
+          brew install youtube-dl ffmpeg
+          make youtube-dl
+
+  bitcoinand-macos-host:
+    runs-on: macos-10.15
+    steps:
+      ## REF: https://githubmemory.com/repo/Gisleburt/cancel-workflow-action
+      - uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2
+      - name: Make
+        run: |
+          git clone https://github.com/BitcoinAnd/bitcoinAnd.github.io.git ~/bitcoinAnd && pushd ~/bitcoinAnd
+          sudo make install
+          sudo npm run-script build
+          brew install youtube-dl ffmpeg
+          make youtube-dl
 
 
