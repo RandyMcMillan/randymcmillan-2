@@ -200,3 +200,30 @@ jobs:
           make youtube-dl
 
 
+  pifs-u18-host:
+    runs-on: ubuntu-18.04
+    steps:
+      ## REF: https://githubmemory.com/repo/Gisleburt/cancel-workflow-action
+      - uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2
+      - name: Make
+        run: |
+          git clone https://github.com/RandyMcMillan/pifs.git ~/pifs && pushd ~/pifs
+          sudo apt install autotools-dev
+          sudo apt install automake
+          sudo apt install fuse-emulator-gtk  # version 1.5.7+dfsg1-3, or
+          sudo apt install gcc
+          sudo apt install pkg-config
+          sudo apt install libfuse-dev
+
+          ./autogen.sh
+          ./configure
+          make
+          make install
+          mkdir -p ~/meta
+          mkdir -p ~/mountpoint
+          πfs -o mdd=~/meta ~/mountpoint
+
