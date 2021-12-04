@@ -323,7 +323,7 @@ clean: touch-time touch-global
 .PHONY: serve
 .ONESHELL:
 serve:
-	bash -c "python3 -m http.server $(PORT) -d . &"
+	bash -c "$(PYTHON#) -m http.server $(PORT) -d . &"
 
 .PHONY: failure
 failure:
