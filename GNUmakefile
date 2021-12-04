@@ -242,7 +242,7 @@ touch-global: remove git-add touch-block-time
 touch-block-time: remove git-add
 	@echo touch-block-time
 	$(PYTHON3) -m pip install --user blockcypher
-	./touch-block-time.py
+	$(PYTHON3) touch-block-time.py
 	BLOCK_TIME=$(shell  ./touch-block-time.py)
 	bash -c "export BLOCK_TIME"
 	echo $(BLOCK_TIME)
