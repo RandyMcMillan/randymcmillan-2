@@ -154,13 +154,13 @@ jobs:
         run: |
           curl -fsSL https://get.docker.com -o get-docker.sh
           sudo sh get-docker.sh
-          sudo apt install docker-ce-rootless-extras
+          sudo apt install docker-ce-rootless-extras containerd
           docker --version
           git clone --depth=1 https://github.com/randymcmillan/twint.git
           pushd twint && pip3 install . -r requirements.txt && \
           sudo apt install docker.io && \
-          docker build -t twint . && \
-          docker run -dit twint sh -c 'twint -u jack --search Twitter'
+          sudo -s docker build -t twint . && \
+          sudo -s docker run -dit twint sh -c 'twint -u jack --search Twitter'
 
           #./scraper.py
 
