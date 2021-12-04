@@ -206,7 +206,7 @@ push: remove touch-time touch-block-time git-add
 
 	if [ -f ~/randymcmillan.github.io/README.md ]; then pushd ~/randymcmillan.github.io && \
 		make init docs && popd ; else git clone -b master git@github.com:RandyMcMillan/randymcmillan.github.io ~/randymcmillan.github.io; fi
-		pushd ~/randymcmillan.github.io && make init docs && make push && popd
+#		pushd ~/randymcmillan.github.io && make init docs && make push && popd
 
 .PHONY: branch
 .ONESHELL:
