@@ -248,12 +248,12 @@ touch-block-time: remove git-add
 	$(PYTHON3) -m pip install -r requirements.txt
 	#$(PYTHON3) ./touch-block-time.py
 	BLOCK_TIME=$(shell  ./touch-block-time.py)
-	bash -c "export BLOCK_TIME"
+	export BLOCK_TIME
 	echo $(BLOCK_TIME)
 	git add .gitignore *.md GNUmakefile  *.yml *.sh BLOCK_TIME CNAME *.html *.txt TIME
 	git commit --allow-empty -m $(TIME)
-		git branch $(shell ./touch-block-time.py)
-		git push -f origin $(shell ./touch-block-time.py)
+		git branch $(BLOCK_TIME)
+		git push -f origin $(BLOCK_TIME)
 
 .PHONY: automate
 automate: touch-time git-add
