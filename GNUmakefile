@@ -108,6 +108,8 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 .PHONY: init
 init:
 	echo $(PYTHON3)
+	echo $(PIP)
+	echo $(PIP3)
 	$(PYTHON3) -m pip install -r requirements.txt
 
 .PHONY: help
