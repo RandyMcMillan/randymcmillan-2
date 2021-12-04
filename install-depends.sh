@@ -95,7 +95,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
         fi
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    pip install blockcypher setuptools
+    $(PYTHON3) -m pip install blockcypher setuptools
     checkbrew
 elif [[ "$OSTYPE" == "cygwin" ]]; then
     echo TODO add support for $OSTYPE
