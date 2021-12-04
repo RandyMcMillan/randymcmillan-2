@@ -74,7 +74,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
             sudo apt install ./keybase_amd64.deb
             run_keybase
             sudo apt install  libappindicator1 libdbusmenu-gtk4 libindicator7 indicator-application #python-setuptools #keybase
-            $(PYTHON3) -m pip install blockcypher
+            $(PYTHON3) -m pip install -r requirements.txt
         fi
     fi
     if [[ "$OSTYPE" == "linux-musl" ]]; then
@@ -95,7 +95,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
         fi
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    $(PYTHON3) -m pip install blockcypher setuptools
+    $(PYTHON3) -m pip install -r requirements.txt
     checkbrew
 elif [[ "$OSTYPE" == "cygwin" ]]; then
     echo TODO add support for $OSTYPE
