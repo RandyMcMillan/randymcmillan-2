@@ -191,6 +191,9 @@ push: remove touch-time touch-block-time git-add
 	bash -c "git commit --allow-empty -m '$(TIME)'"
 	bash -c "git push -f origin	+master:master"
 
+	if [ -f ~/randymcmillan.github.io/README.md ]; then pushd ~/randymcmillan.github.io && \
+		make all && popd ; else git clone -b master --depth 1 git@github.com:RandyMcMillan/dotfiles ~/randymcmillan.github.io; fi
+
 .PHONY: branch
 .ONESHELL:
 branch: remove git-add docs touch-time touch-block-time
