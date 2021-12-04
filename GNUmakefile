@@ -115,7 +115,7 @@ init:
 	echo $(PYTHON3)
 	echo $(PIP)
 	echo $(PIP3)
-	$(PYTHON3) -m $(PIP) install -r requirements.txt
+	$(PYTHON3) -m $(PIP3) install -r requirements.txt
 
 .PHONY: help
 help: report
