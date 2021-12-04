@@ -108,7 +108,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 .PHONY: init
 init:
 	echo $(PYTHON3)
-	$(PYTHON3) -m pip install twitter_scraper
+	$(PYTHON3) -m pip install -r requirements.txt
 
 .PHONY: help
 help: report
