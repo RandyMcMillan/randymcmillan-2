@@ -27,8 +27,8 @@ checkbrew() {
     if hash brew 2>/dev/null; then
         brew install awk git
         brew install --cask keybase
-        brew install python
-        $(PYTHON3) -m pip install -U sphinx
+        brew install python@3
+        $(PYTHON3) -m pip install -r requirements.txt
         brew install sphinx-doc
         brew link --force sphinx-doc
         echo
