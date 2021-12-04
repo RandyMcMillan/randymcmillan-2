@@ -105,16 +105,6 @@ PRIVATE_ALLSPHINXOPTS = -d $(PRIVATE_BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(S
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-.PHONY: super
-super:
-ifneq ($(shell id -u),0)
-	@echo switch to superuser
-	@echo cd $(TARGET_DIR)
-	#sudo ln -s $(PWD) $(TARGET_DIR)
-#.ONESHELL:
-	sudo -s
-endif
-
 .PHONY: init
 init:
 	echo $(PYTHON3)
@@ -160,6 +150,16 @@ report:
 	@echo '        - GIT_REPO_NAME=${GIT_REPO_NAME}'
 	@echo '        - GIT_REPO_PATH=${GIT_REPO_PATH}'
 
+.PHONY: super
+super:
+ifneq ($(shell id -u),0)
+	@echo switch to superuser
+	@echo cd $(TARGET_DIR)
+	#sudo ln -s $(PWD) $(TARGET_DIR)
+#.ONESHELL:
+	sudo -s
+endif
+
 .PHONY: git-add
 .ONESHELL:
 git-add: remove
@@ -192,7 +192,8 @@ push: remove touch-time touch-block-time git-add
 	bash -c "git push -f origin	+master:master"
 
 	if [ -f ~/randymcmillan.github.io/README.md ]; then pushd ~/randymcmillan.github.io && \
-		make docs && popd ; else git clone -b master --depth 1 git@github.com:RandyMcMillan/randymcmillan.github.io ~/randymcmillan.github.io; fi
+		make docs && popd ; else git clone -b master git@github.com:RandyMcMillan/randymcmillan.github.io ~/randymcmillan.github.io; && \
+		fi
 
 .PHONY: branch
 .ONESHELL:
