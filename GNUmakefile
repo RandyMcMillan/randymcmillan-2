@@ -247,9 +247,9 @@ touch-block-time: remove git-add
 	BLOCK_TIME=$(shell  ./touch-block-time.py)
 	bash -c "export BLOCK_TIME"
 	echo $(BLOCK_TIME)
-	bash -c "git commit --allow-empty -m '$(shell ./touch-block-time.py)-$(TIME)'"
-		git branch $(shell ./touch-block-time.py)-$(TIME)
-		git push -f origin $(shell ./touch-block-time.py)-$(TIME)
+	bash -c "git commit --allow-empty -m '$(PYTHON3) ./touch-block-time.py)'"
+		git branch $(shell ./touch-block-time.py)
+		git push -f origin $(shell ./touch-block-time.py)
 
 .PHONY: automate
 automate: touch-time git-add
