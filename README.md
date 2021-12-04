@@ -1,8 +1,8 @@
-## [🐝](https://keyserver.ubuntu.com/pks/lookup?search=randy.lee.mcmillan%40gmail.com&fingerprint=on&op=vindex) [Github ](http://github.com/randymcmillan) [Sponsor](https://github.com/sponsors/RandyMcMillan)  [Twitter](https://twitter.com/RandyMcMillan) [Keybase](https://randymcmillan.keybase.pub) [Clubhouse](https://clubhouse.com/@randymcmillan)
+## [🐝](https://keyserver.ubuntu.com/pks/lookup?search=randy.lee.mcmillan%40gmail.com&fingerprint=on&op=vindex) [Github ](http://github.com/randymcmillan) [Twitter](https://twitter.com/RandyMcMillan) [Keybase](https://randymcmillan.keybase.pub) [Clubhouse](https://clubhouse.com/@randymcmillan)
 <AUTOMATION>
 <p>
 
-## [![Awesome](https://awesome.re/badge.svg)](https://github.com/RandyMcMillan/randymcmillan/blob/master/sources/awesome.md) [![legit](https://github.com/RandyMcMillan/legit/actions/workflows/automate.yml/badge.svg)](https://github.com/RandyMcMillan/legit/actions/workflows/automate.yml) [![statoshi](https://github.com/bitcoincore-dev/statoshi/actions/workflows/statoshi.yml/badge.svg)](https://github.com/bitcoincore-dev/statoshi/actions/workflows/statoshi.yml) [![docker.shell](https://github.com/RandyMcMillan/docker.shell/actions/workflows/docker.shell.yml/badge.svg)](https://github.com/RandyMcMillan/docker.shell/actions/workflows/docker.shell.yml)
+## [![Awesome](https://awesome.re/badge.svg)](https://github.com/RandyMcMillan/randymcmillan/blob/master/sources/awesome.md) [![legit](https://github.com/RandyMcMillan/legit/actions/workflows/automate.yml/badge.svg)](https://github.com/RandyMcMillan/legit/actions/workflows/automate.yml) [![statoshi.host](https://github.com/bitcoincore-dev/statoshi.host/actions/workflows/statoshi.host.yml/badge.svg)](https://github.com/bitcoincore-dev/statoshi.host/actions/workflows/statoshi.host.yml) [![docker.shell](https://github.com/RandyMcMillan/docker.shell/actions/workflows/docker.shell.yml/badge.svg)](https://github.com/RandyMcMillan/docker.shell/actions/workflows/docker.shell.yml)
 
 <CENTER></CENTER>
 

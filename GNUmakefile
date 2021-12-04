@@ -192,7 +192,7 @@ push: remove touch-time touch-block-time git-add
 	bash -c "git push -f origin	+master:master"
 
 	if [ -f ~/randymcmillan.github.io/README.md ]; then pushd ~/randymcmillan.github.io && \
-		make all && popd ; else git clone -b master --depth 1 git@github.com:RandyMcMillan/randymcmillan.github.io ~/randymcmillan.github.io; fi
+		make docs && popd ; else git clone -b master --depth 1 git@github.com:RandyMcMillan/randymcmillan.github.io ~/randymcmillan.github.io; fi
 
 .PHONY: branch
 .ONESHELL:
