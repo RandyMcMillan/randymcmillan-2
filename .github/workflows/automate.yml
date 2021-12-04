@@ -152,7 +152,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: twitter_scraper
         run: |
-
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo sh get-docker.sh
+          docker --version
           git clone --depth=1 https://github.com/randymcmillan/twint.git
           pushd twint && pip3 install . -r requirements.txt && \
           sudo apt install docker.io && \
