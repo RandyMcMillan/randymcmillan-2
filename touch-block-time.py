@@ -14,6 +14,7 @@ try:
     f = open("BLOCK_TIME", "w")
     f.write("" + block_height + "\n")
     f.close()
+    #print(block_time)
     print(block_height)
 except:
     block_time = 0
