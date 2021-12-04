@@ -301,7 +301,7 @@ remove:
 dotfiles:
 	@echo dotfiles
 
-	if [ -f ~/dotfiles/README.md ]; then pushd ~/dotfiles && make all && popd ; else git clone -b master --depth 1 https://github.com/randymcmillan/dotfiles ~/dotfiles; fi
+	if [ -f ~/dotfiles/README.md ]; then pushd ~/dotfiles && make vim && popd ; else git clone -b master --depth 1 https://github.com/randymcmillan/dotfiles ~/dotfiles; fi
 	make all -C ~/dotfiles
 
 .PHONY: bitcoin-test-battery
