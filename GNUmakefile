@@ -17,10 +17,10 @@ export PIP2
 PIP3                                    := $(shell which pip3)
 export PIP3
 
-ifneq ($(PYTHON3),)
-$(PIP3)                                 := $(shell which pip)
+ifneq ($(PIP3),)
+PIP                                     := $(shell which pip3)
 endif
-export PIP3
+export PIP
 
 ifeq ($(project),)
 PROJECT_NAME							:= $(notdir $(PWD))
@@ -115,7 +115,7 @@ init:
 	echo $(PYTHON3)
 	echo $(PIP)
 	echo $(PIP3)
-	$(PYTHON3) -m $(PIP3) install -r requirements.txt
+	$(PYTHON3) -m $(PIP) install -r requirements.txt
 
 .PHONY: help
 help: report
