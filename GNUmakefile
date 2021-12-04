@@ -214,14 +214,6 @@ branch: remove git-add docs touch-time touch-block-time
 	git branch $(TIME)
 	git push -f origin $(TIME)
 
-.PHONY: global-branch
-.ONESHELL:
-global-branch: remove git-add docs touch-time touch-global touch-block-time
-	@echo global-branch
-	bash -c "git commit -m 'make global-branch by $(GIT_USER_NAME) on global-$(TIME)'"
-		git branch global-$(TIME)
-		git push -f --all
-
 .PHONY: time-branch
 .ONESHELL:
 time-branch: remove git-add docs touch-time touch-block-time
