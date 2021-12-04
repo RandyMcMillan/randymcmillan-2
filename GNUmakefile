@@ -10,17 +10,19 @@ export PYTHON2
 PYTHON3                                 := $(shell which python3)
 export PYTHON3
 
-PIP                                     := $(shell which pip)
+PIP                                     := $(notdir $(shell which pip))
 export PIP
-PIP2                                    := $(shell which pip2)
+PIP2                                    := $(notdir $(shell which pip2))
 export PIP2
-PIP3                                    := $(shell which pip3)
+PIP3                                    := $(notdir $(shell which pip3))
 export PIP3
 
-ifneq ($(PIP3),)
-PIP                                     := $(shell which pip3)
-endif
+ifeq ($(PYTHON3),/usr/local/bin/python3)
+PIP                                    := pip
+PIP3                                   := pip
 export PIP
+export PIP3
+endif
 
 ifeq ($(project),)
 PROJECT_NAME							:= $(notdir $(PWD))
@@ -112,10 +114,13 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 .PHONY: init
 init:
-	echo $(PYTHON3)
-	echo $(PIP)
-	echo $(PIP3)
-	$(PYTHON3) -m $(PIP3) install -r requirements.txt
+	@echo $(PYTHON)
+	@echo $(PYTHON2)
+	@echo $(PYTHON3)
+	@echo $(PIP)
+	@echo $(PIP2)
+	@echo $(PIP3)
+	$(PYTHON3) -m $(PIP) install -r requirements.txt
 
 .PHONY: help
 help: report
@@ -242,7 +247,7 @@ touch-global: remove git-add touch-block-time
 touch-block-time: remove git-add
 	@echo touch-block-time
 	@echo $(PYTHON3)
-	$(PYTHON3) -m pip install -r requirements.txt
+	$(PYTHON3) -m $(PIP) install -r requirements.txt
 	#$(PYTHON3) ./touch-block-time.py
 	BLOCK_TIME=$(shell  ./touch-block-time.py)
 	export BLOCK_TIME
