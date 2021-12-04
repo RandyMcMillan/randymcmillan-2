@@ -2,7 +2,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('/usr/local/lib/python3.9/site-packages'))
+#sys.path.insert(0, os.path.abspath('/usr/local/lib/python3.9/site-packages'))
 import time
 millis = int(round(time.time() * 1000))
 seconds = int(round(time.time()))
