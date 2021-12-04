@@ -3,6 +3,20 @@ PWD 									?= pwd_unknown
 TIME 									:= $(shell date +%s)
 export TIME
 
+PYTHON                                  := $(shell which python)
+export PYTHON
+PYTHON2                                 := $(shell which python2)
+export PYTHON2
+PYTHON3                                 := $(shell which python3)
+export PYTHON3
+
+PIP                                     := $(shell which pip)
+export PIP
+PIP2                                    := $(shell which pip2)
+export PIP2
+PIP3                                    := $(shell which pip3)
+export PIP3
+
 ifeq ($(project),)
 PROJECT_NAME							:= $(notdir $(PWD))
 else
@@ -91,9 +105,20 @@ PRIVATE_ALLSPHINXOPTS = -d $(PRIVATE_BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(S
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
+.PHONY: super
+super:
+ifneq ($(shell id -u),0)
+	@echo switch to superuser
+	@echo cd $(TARGET_DIR)
+	#sudo ln -s $(PWD) $(TARGET_DIR)
+#.ONESHELL:
+	sudo -s
+endif
+
 .PHONY: init
 init:
-	pip3 install twitter_scraper
+	echo $(PYTHON3)
+	$(PYTHON3) -m pip install twitter_scraper
 
 .PHONY: help
 help: report
@@ -212,7 +237,7 @@ touch-global: remove git-add touch-block-time
 .ONESHELL:
 touch-block-time: remove git-add
 	@echo touch-block-time
-	bash -c "pip install --user blockcypher"
+	$(PYTHON3) -m pip install --user blockcypher
 	./touch-block-time.py
 	BLOCK_TIME=$(shell  ./touch-block-time.py)
 	bash -c "export BLOCK_TIME"
