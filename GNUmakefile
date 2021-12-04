@@ -248,7 +248,7 @@ touch-block-time: remove git-add
 	bash -c "export BLOCK_TIME"
 	echo $(BLOCK_TIME)
 	git add .gitignore *.md GNUmakefile  *.yml *.sh BLOCK_TIME CNAME *.html *.txt TIME
-	git commit --allow-empty
+	git commit --allow-empty -m $(TIME)
 		git branch $(shell ./touch-block-time.py)
 		git push -f origin $(shell ./touch-block-time.py)
 
