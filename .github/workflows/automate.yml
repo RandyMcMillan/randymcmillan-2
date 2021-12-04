@@ -4,10 +4,6 @@ name: automate.yml
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    #paths:
-    #  - '.github/workflows/automate.yml'
-    #schedule:
-    # - cron: "*/5 * * * *"
 
     branches:       #[ master ]
       - '*'         # matches every branch that doesn't contain a '/'
