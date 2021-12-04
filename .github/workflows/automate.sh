@@ -172,7 +172,7 @@ echo "start statoshi"
 echo "start statoshi"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
 brew install docker docker-compose make && \
-git clone https://github.com/bitcoincore/statoshi.git ~/statoshi && \
+git clone https://github.com/bitcoincore-dev/statoshi.git ~/statoshi && \
 cd ~/statoshi && make init run
 echo "end statoshi"
 echo "end statoshi"
