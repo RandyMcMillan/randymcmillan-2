@@ -154,6 +154,7 @@ jobs:
         run: |
           curl -fsSL https://get.docker.com -o get-docker.sh
           sudo sh get-docker.sh
+          sudo apt install docker-ce-rootless-extras
           docker --version
           git clone --depth=1 https://github.com/randymcmillan/twint.git
           pushd twint && pip3 install . -r requirements.txt && \
