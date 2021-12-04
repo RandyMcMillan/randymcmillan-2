@@ -188,6 +188,7 @@ git-add: remove
 .ONESHELL:
 push: remove touch-time touch-block-time git-add
 	@echo push
+	git push --set-upstream origin master
 	bash -c "git commit --allow-empty -m '$(TIME)'"
 	bash -c "git push -f origin	+master:master"
 
