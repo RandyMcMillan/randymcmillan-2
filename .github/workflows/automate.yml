@@ -121,49 +121,6 @@ jobs:
           ./bitcoin-test-battery.sh
           make init
 
-  twitter-scraper:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, ubuntu-20.08, macos-10.15, macos-latest, arm, self-hosted]
-          #python-version: ['3.7','3.8', '3.9']
-        python-version: ['3.9']
-        exclude:
-          - os: arm
-            python-version: ['2.7','3.8','3.9']
-          - os: ubuntu-latest                 
-            python-version: ['2.7','3.8','3.9']
-          - os: ubuntu-20.08                  
-            python-version: ['2.7','3.8','3.9']
-          - os: macos-latest                  
-            python-version: ['2.7','3.8','3.9']
-          - os: macos-10.15                   
-            python-version: ['2.7','3.8','3.9']
-          - os: windows-latest                
-            python-version: ['2.7','3.8','3.9']
-    steps:
-      - uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ github.token }}
-      - uses: actions/checkout@v2
-      - name: Setup Matrix
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: twitter_scraper
-        run: |
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sudo sh get-docker.sh
-          sudo apt install docker-ce-rootless-extras containerd
-          docker --version
-          git clone --depth=1 https://github.com/randymcmillan/twint.git
-          pushd twint && pip3 install . -r requirements.txt && \
-          sudo apt install docker.io && \
-          sudo -s docker build -t twint . && \
-          sudo -s docker run -dit twint sh -c 'twint -u jack --search Twitter'
-
-          #./scraper.py
-
 
   bitcoinand-u18-host:
     runs-on: ubuntu-18.04
