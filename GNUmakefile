@@ -296,6 +296,10 @@ remove:
 	rm -rf dotfiles
 	rm -rf legit
 
+.PHONY: bitcoin-test-battery
+bitcoin-test-battery:
+	./bitcoin-test-battery.sh v22.0rc3
+
 .PHONY: dotfiles
 .ONESHELL:
 dotfiles:
