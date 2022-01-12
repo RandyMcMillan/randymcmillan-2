@@ -112,6 +112,9 @@ PRIVATE_ALLSPHINXOPTS = -d $(PRIVATE_BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(S
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
+.PHONY: -
+-: help
+
 .PHONY: init
 init:
 	@echo $(PYTHON)
@@ -312,9 +315,8 @@ dotfiles:
 .ONESHELL:
 bitcoin-test-battery:
 
-	if [ -f ~/bitcoin-test-battery-$(TIME)/README.md ]; then pushd ~/bitcoin-test-battery-$(TIME) && ./autogen.sh && ./configure && make deploy && ./scr/bitcoind && popd ; \
-		else git clone -b master --depth 1 https://github.com/bitcoin/bitcoin ~/bitcoin-test-battery-$(TIME) && pushd ~/bitcoin-test-battery-$(TIME) && ./autogen.sh && ./configure && make deploy; \
-	fi
+	if [ -f $(TIME)/README.md ]; then pushd $(TIME) && ./autogen.sh && ./configure && make && popd ; else git clone -b master --depth 3 https://github.com/bitcoin/bitcoin $(TIME) && \
+		pushd $(TIME) && ./autogen.sh && ./configure && make deploy; fi
 
 .PHONY: legit
 .ONESHELL:

@@ -6,22 +6,21 @@ export TIME
 #GH_USER=randymcmillan
 GH_USER=bitcoin
 export GH_USER
-if [ -z "$1" ]; then
-#RC=v22.0rc3-boost-fetch
-#RC=v22.0rc3
+#if [ -z "$1" ]; then
 
 RECENT_TAG=$(git ls-remote --tags --refs --sort="v:refname" git://github.com/bitcoin/bitcoin.git | tail -n1 | sed 's/.*\///')
-
-#echo $RECENT_TAG
+export RECENT_TAG
+echo $RECENT_TAG
 
 git ls-remote --tags https://github.com/bitcoin/bitcoin.git v2*
+
 echo
 echo Example:
 echo ./bitcoin-test-battery.sh $RECENT_TAG
-exit;
-else
+#exit;
+#else
 RC=$1
-fi
+#fi
 export RC
 
 BITCOIN_CONF1="proxy=127.0.0.1:9050 #If you use Windows, this could possibly be 127.0.0.1:9150 in some cases.\r
@@ -71,13 +70,14 @@ echo $TIME
 make-data-dir
 
 pushd $PWD
-    git clone -b $RC https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$TIME && \
-        pushd $PWD/bitcoin-test-battery-$TIME
-    git fetch --all
-    git checkout $RC
+    git clone https://github.com/$GH_USER/bitcoin $PWD/bitcoin-test-battery-$TIME && \
+        pushd $PWD/bitcoin-test-battery-$TIME && \
+        git fetch --all && \
+        git checkout $RECENT_TAG
     #
-    make -C depends clean-all
-    make -C depends boost_fetched
+    #make -C depends clean-all
+    #make -C depends boost_fetched
+    make -C depends
     #
     ./contrib/install_db4.sh .
     export BDB_PREFIX='/Users/git/bitcoin-test-battery/db4'
@@ -86,7 +86,11 @@ pushd $PWD
     export QT_PATH=$(pwd)/src/qt
     export BINARY_PATH=$(pwd)/bin
     export QT_PATH=$BINARY_PATH
-    ./autogen.sh && ./configure --with-gui=yes BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" && make -j $(nproc --all)
+    ./autogen.sh
+    #./configure --with-gui=yes BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" && make -j $(nproc --all)
+    #./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" && make -j $(nproc --all)
+    ./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include"
+    make -j $(nproc --all)
     #./autogen.sh && ./configure --with-gui=yes --with-sqlite=yes --without-bdb && make -j $(nproc --all)
     #REF: https://github.com/bitcoin-core/bitcoin-devwiki/wiki/22.0-Release-Candidate-Testing-Guide
     #$BINARY_PATH/bitcoin-cli -datadir=$DATA_DIR [cli args]
@@ -94,6 +98,7 @@ pushd $PWD
     #$QT_PATH/bitcoin-qt -datadir=$DATA_DIR [cli args]
 
     #cd ~/BITCOIN_TEST_BATTERY && ./contrib/install_db4.sh .
+    make appbundle
 
 }
 
@@ -103,6 +108,7 @@ checkbrew() {
         #install brew libs
         brew install wget
         brew install curl
+        brew install gcc
         brew install autoconf automake berkeley-db4 libtool boost miniupnpc pkg-config python qt@5 libevent qrencode tor
         brew install librsvg
         brew install codespell shellcheck
@@ -117,15 +123,16 @@ checkbrew() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     checkbrew
     sudo apt install linuxbrew-wrapper
-    sudo apt-get install autoconf
-    sudo apt-get install libdb4.8++-dev
+    sudo apt-get -y install autoconf
+    sudo apt-get -y install libdb4.8++-dev
     sudo apt-get -y install libboost libevent miniupnpc libdb4.8 qt libqrencode univalue libzmq3
-    sudo apt-get install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
-    sudo apt-get install libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev
-    sudo apt-get install libminiupnpc-dev
-    sudo apt-get install libzmq3-dev
-    sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools
-    sudo apt-get install libqrencode-dev
+    sudo apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+    sudo apt-get -y install libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev
+    sudo apt-get -y install libminiupnpc-dev
+    sudo apt-get -y install libzmq3-dev
+    sudo apt-get -y install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools
+    sudo apt-get -y install libqrencode-dev
+    sudo apt-get -y install qtcreator
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     checkbrew
@@ -154,6 +161,5 @@ else
     echo TODO add support for $OSTYPE
     doIt
 fi
-
 
 doIt
