@@ -314,7 +314,7 @@ dotfiles:
 bitcoin-test-battery:
 
 	if [ -f $(TIME)/README.md ]; then pushd $(TIME) && ./autogen.sh && ./configure && make && popd ; else git clone -b master --depth 3 https://github.com/bitcoin/bitcoin $(TIME) && \
-		pushd $(TIME) && ./autogen.sh && ./configure && make deploy; fi
+		pushd $(TIME) && ./autogen.sh && ./configure --disable-wallet --disable-bench --disable-tests && make deploy; fi
 
 .PHONY: legit
 .ONESHELL:
