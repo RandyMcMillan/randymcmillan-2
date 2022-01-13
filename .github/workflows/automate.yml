@@ -34,6 +34,8 @@ jobs:
             python-version: ['2.7','3.6','3.7']
           - os: windows-latest
             python-version: ['2.7','3.6','3.7']
+          - os: self-hosted
+            python-version: ['3.9']
     steps:
       - uses: styfle/cancel-workflow-action@0.8.0
         with:
